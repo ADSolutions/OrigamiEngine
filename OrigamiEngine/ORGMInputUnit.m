@@ -94,7 +94,14 @@
             [_decoder seek:seekFrame];
             _shouldSeek = NO;
         }
-        int framesToRead = CHUNK_SIZE/bytesPerFrame;
+        
+        int framesToRead = 0;
+        
+        if (bytesPerFrame > 0)
+        {
+            framesToRead = CHUNK_SIZE/bytesPerFrame;
+        }
+        
         framesRead = [_decoder readAudio:inputBuffer frames:framesToRead];
         amountInBuffer = (framesRead * bytesPerFrame);
         
